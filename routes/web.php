@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,7 @@ use App\Models\Listing;
 // index - show all listings
 // show - show single listing
 // create - show form to create new listing
-// store - show new listing
+// store - store new listing
 // edit - show form to edit listing
 // update - update listing
 // destroy - delete listing
@@ -32,5 +32,21 @@ Route::get('/listings/create', [ListingController::class, 'create']);
 // Store Form Data
 Route::post('/listings', [ListingController::class, 'store']);
 
+// Show Edit Form
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+
+// Update Listing
+Route::put('/listings/{listing}', [ListingController::class, 'update']);
+
+// Delete Listing
+Route::delete('/listings/{listing}', [ListingController::class, 'delete']);
+
+
 // Single listing(Eloquent)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+// Show Register/Create Form
+Route::get('/register', [UserController::class, 'create']);
+
+// Create New User
+Route::post('/users', [UserController::class, 'store']);
