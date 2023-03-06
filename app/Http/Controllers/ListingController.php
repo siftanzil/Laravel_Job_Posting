@@ -29,7 +29,7 @@ class ListingController extends Controller
         return view('listings.create');
     }
 
-    // Store Lisitng Data
+    // Store Listing Data
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -41,6 +41,10 @@ class ListingController extends Controller
             'tags' => 'required',
             'description' => 'required'
         ]);
+
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
 
         Listing::create($formFields);
 
